@@ -4,6 +4,7 @@
 
 #include "mhDefs.h"
 #include "stuDefs.h"
+#include "newDataTypes.h"
 
 void mh_freeblock(HeapType *, int);
 
@@ -34,8 +35,40 @@ int main()
 
   printf("\nDUMP 3, byte count = %d\n", mh_count(heap));
   mh_dump(heap);
-  printf("\n\n");
 
+  printf("\nADDITIONAL TESTING:\n");
+
+  mh_alloc(heap, 70*sizeof(float), "floats");
+
+  printf("\nDUMP 4, byte count = %d\n", mh_count(heap));
+  mh_dump(heap);
+
+  void *server_entries;
+  server_entries = mh_alloc(heap, 20*sizeof(ServerEntryType), "ServerEntries");
+  mh_alloc(heap, 9*sizeof(MatrixType), "Matrices");
+
+  printf("\nDUMP 5, byte count = %d\n", mh_count(heap));
+  mh_dump(heap);
+
+  mh_dealloc(heap, server_entries);
+  mh_alloc(heap, 32*sizeof(Point3DType), "3D points");
+  mh_alloc(heap, 2*sizeof(Point3DType), "3D Points");
+
+  printf("\nDUMP 6, byte count = %d\n", mh_count(heap));
+  mh_dump(heap);
+
+  mh_collect(heap);
+  mh_alloc(heap, 10*sizeof(long), "longs");
+
+  printf("\nDUMP 7, byte count = %d\n", mh_count(heap));
+  mh_dump(heap);
+
+  mh_alloc(heap, 64*sizeof(HeapType), "heaps");
+
+  printf("\nDUMP 8, byte count = %d\n", mh_count(heap));
+  mh_dump(heap);
+
+  printf("\n\n");
   mh_cleanup(heap);
   free(heap);
 
@@ -52,8 +85,6 @@ void mh_init(HeapType *heap) {
     heap->blocks[i].rsv  = C_FALSE;
     heap->blocks[i].addr = NULL;
     heap->blocks[i].size = 0;
-    // heap->blocks[i].tag[0] = 0;
-    // heap->blocks[i].tag[MAX_STR-1] = 0;
   }
 }
 void mh_cleanup(HeapType *heap) {
