@@ -1,0 +1,35 @@
+
+0. Preamble
+===========
+    Author:  Jagger De Leo
+Student ID:  100938125
+    Course:  COMP2401
+Instructor:  Prof. Laurendeau
+Assignment:  #3
+   Purpose:  A function library to track memory in blocks.
+       URL:  github.com/jagger27/Memory-Hunter/ (after Nov 6)
+
+	 Files:  main.c*
+	 		 mhDefs.h
+ 	 		 newDataTypes.h*
+	 		 README*
+	 		 stuDefs.h
+
+* indicates new or modified file.
+
+1. Compilation
+==============
+Using the course specified compiler (gcc)
+
+$ gcc -o memhunt main.c
+
+
+2. Usage
+========
+memhunt takes no arguments.
+
+$ ./memhunt
+
+3. Notes
+========
+See main.c for function documentation.
